@@ -19,9 +19,9 @@ class LeBUtil private constructor() {
     val deviceList = mutableListOf<LelinkServiceInfo>()
     var selectLelinkServiceInfo: LelinkServiceInfo? = null
 
-    var lastLinkIp by SharedPreference("lastLinkIp","")
-    var lastLinkName by SharedPreference("lastLinkName","")
-    var lastLinkUid by SharedPreference("lastLinkUid","")
+    var lastLinkIp by SharedPreference("lastLinkIp", "")
+    var lastLinkName by SharedPreference("lastLinkName", "")
+    var lastLinkUid by SharedPreference("lastLinkUid", "")
 
     private fun initListener() {
         sdk.run {
@@ -120,7 +120,7 @@ class LeBUtil private constructor() {
                 Log.d("乐播云", "onPositionUpdate")
 //                events?.success(Result().addParam("type", ResultType.position))
                 Observable.just(1).observeOn(AndroidSchedulers.mainThread()).subscribe {
-                    events?.success(buildResult(ResultType.position, "onPositionUpdate"))
+                    events?.success(buildResult(ResultType.position, p1))
                 }
             }
 
@@ -221,6 +221,7 @@ class LeBUtil private constructor() {
         sdk.startBrowse()
     }
 
+    ///播放视频
     fun play(url: String) {
         sdk.resume()
         var playerInfo = LelinkPlayerInfo()
@@ -229,6 +230,11 @@ class LeBUtil private constructor() {
         playerInfo.type = LelinkSourceSDK.MEDIA_TYPE_VIDEO
         playerInfo.lelinkServiceInfo = selectLelinkServiceInfo
         sdk.startPlayMedia(playerInfo)
+    }
+
+    ///跳转到对应进度
+    fun seek2Position(seekPosition: Int) {
+        sdk.seekTo(seekPosition)
     }
 
     fun initEvent(events: EventChannel.EventSink?) {
