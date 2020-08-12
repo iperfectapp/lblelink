@@ -20,7 +20,7 @@ import 'package:lblelinkplugin/tv_list.dart';
 初始化
 ...
 //参数：appid、secretKey
-Lblelinkplugin.initLBSdk("14342", "c67255e53e3feee87673bc67f6895360");
+Lblelinkplugin.initLBSdk("you_key", "you_secret");
 ...
 ```
 **4.内部方法**
