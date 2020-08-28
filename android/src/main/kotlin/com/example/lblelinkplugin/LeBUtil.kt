@@ -56,9 +56,14 @@ class LeBUtil private constructor() {
                 }
 
                 override fun onDisconnect(p0: LelinkServiceInfo?, p1: Int, p2: Int) {
-                    events?.success(
-                            buildResult(ResultType.disConnect, "disConnect")
-                    )
+                    if(p1 == IConnectListener.CONNECT_INFO_DISCONNECT){
+                        events?.success(
+                                buildResult(ResultType.disConnect, "disConnect")
+                        )
+                    }else if(p1 == IConnectListener.CONNECT_ERROR_FAILED){
+                        events?.success(buildResult(ResultType.connectError, "disConnect"))
+                    }
+
                 }
             })
 

@@ -57,6 +57,9 @@ class Lblelinkplugin {
         case 10:
           _lbCallBack?.positionCallBack(data["data"]);
           break;
+        case 11:
+          _lbCallBack?.connectError();
+          break;
         default:
           print(data["data"]);
           break;
@@ -174,6 +177,8 @@ abstract class LbCallBack {
   void pauseCallBack() {}
 
   void stopCallBack() {}
+
+  void connectError(){}
 
   void errorCallBack(String errorDes) {}
 
