@@ -54,6 +54,12 @@ class Lblelinkplugin {
         case 9:
           _lbCallBack?.errorCallBack(data["data"]);
           break;
+        case 10:
+          _lbCallBack?.positionCallBack(data["data"]);
+          break;
+        case 11:
+          _lbCallBack?.connectError();
+          break;
         default:
           print(data["data"]);
           break;
@@ -66,17 +72,14 @@ class Lblelinkplugin {
   static Future<bool> initLBSdk(String appid, String secretKey) async {
     //初始化的时候注册eventChannel回调
     eventChannelDistribution();
-    return _channel
-        .invokeMethod("initLBSdk", {"appid": appid, "secretKey": secretKey}).then((data){
-
-          return data;
+    return _channel.invokeMethod(
+        "initLBSdk", {"appid": appid, "secretKey": secretKey}).then((data) {
+      return data;
     });
-
 
     //初始化的时候注册eventChannel回调
 
     eventChannelDistribution();
-
   }
 
   //获取设备列表
@@ -108,20 +111,25 @@ class Lblelinkplugin {
   }
 
   //获取上次连接的设备
-  static Future<TvData> getLastConnectService(){
-    return _channel.invokeMethod("getLastConnectService").then((data){
-
+  static Future<TvData> getLastConnectService() {
+    return _channel.invokeMethod("getLastConnectService").then((data) {
       print("data is ${data}");
 
 //      if (data == null){
 //        return data;
 //      }
 
-      return TvData()..uId = data["tvUID"]..name = data["tvName"]..ipAddress = data["ipAddress"];
-
+      return TvData()
+        ..uId = data["tvUID"]
+        ..name = data["tvName"]
+        ..ipAddress = data["ipAddress"];
     });
   }
 
+  ///跳转到对应进度
+  static seek2Position(int position) {
+    _channel.invokeMethod("seek2Position", {"position": position});
+  }
 
   //断开连接
   static disConnect() {
@@ -160,28 +168,19 @@ class Lblelinkplugin {
 }
 
 abstract class LbCallBack {
-  void startCallBack(){
+  void startCallBack() {}
 
-  }
+  void loadingCallBack() {}
 
-  void loadingCallBack(){
+  void completeCallBack() {}
 
-  }
+  void pauseCallBack() {}
 
-  void completeCallBack(){
+  void stopCallBack() {}
 
-  }
+  void connectError(){}
 
-  void pauseCallBack(){
+  void errorCallBack(String errorDes) {}
 
-  }
-
-  void stopCallBack(){
-
-  }
-
-  void errorCallBack(String errorDes){
-
-  }
-
+  void positionCallBack(int position) {}
 }
