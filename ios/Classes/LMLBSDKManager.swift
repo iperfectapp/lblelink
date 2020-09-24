@@ -191,7 +191,8 @@ extension LMLBSDKManager: LBLelinkConnectionDelegate{
     func lelinkConnection(_ connection: LBLelinkConnection, onError error: Error) {
         
         print("连接出错");
-        LMLBEventChannelSupport.sharedInstance.sendErrorToFlutter(error: error)
+//        LMLBEventChannelSupport.sharedInstance.sendErrorToFlutter(error: error)
+        LMLBEventChannelSupport.sharedInstance.sendCommonDesToFlutter(type: .connectError, des: "连接出错")
     }
     
     //收到互动广告
