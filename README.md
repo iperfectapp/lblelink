@@ -9,7 +9,7 @@
 **1.安装**
 ```
 lblelink_plugin:
-    git: https://github.com/pleasecallmelm/lblelink_plugin.git
+    git: https://gitee.com/Sun.start/lblelink_plugin.git
 ```
 **2.导入**
 ```
