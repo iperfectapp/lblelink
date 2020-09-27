@@ -50,6 +50,14 @@ class LBPlayerManager: NSObject {
         self.player.reduceVolume()
     }
     
+    func seekTo(position: Int){
+        
+        self.player.seek(to: position);
+        
+        
+    }
+    
+    
     
    // MARK:--------懒加载--------
    //播放器

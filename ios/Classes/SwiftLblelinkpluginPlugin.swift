@@ -15,17 +15,19 @@ public class SwiftLblelinkpluginPlugin: NSObject, FlutterPlugin {
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     
-    let dict = call.arguments as? [String:String]
+    if let dict = call.arguments as? [String:Any]{
     
     switch call.method {
         case "initLBSdk":
-        LMLBSDKManager.shareInstance.initLBSDK(appid: dict?["appid"] ?? "", secretKey: dict?["secretKey"] ?? "",result: result);
+            let argument = dict as! [String:String];
+            LMLBSDKManager.shareInstance.initLBSDK(appid: argument["appid"] ?? "", secretKey: argument["secretKey"] ?? "",result: result);
         break
         case "beginSearchEquipment":
             LMLBSDKManager.shareInstance.beginSearchEquipment()
         break
         case "connectToService":
-            LMLBSDKManager.shareInstance.linkToService(ipAddress: dict?["ipAddress"] ?? "");
+            let argument = dict as! [String:String];
+            LMLBSDKManager.shareInstance.linkToService(ipAddress: argument["ipAddress"] ?? "");
         break
         case "disConnect":
             LMLBSDKManager.shareInstance.disConnect();
@@ -40,16 +42,23 @@ public class SwiftLblelinkpluginPlugin: NSObject, FlutterPlugin {
             LBPlayerManager.shareInstance.stop();
         break
         case "play":
-            LBPlayerManager.shareInstance.beginPlay(connection: LMLBSDKManager.shareInstance.linkConnection, playUrl: dict?["playUrlString"] ?? "");
+            let argument = dict as! [String:String];
+            LBPlayerManager.shareInstance.beginPlay(connection: LMLBSDKManager.shareInstance.linkConnection, playUrl: argument["playUrlString"] ?? "");
         break
         case "getLastConnectService":
             LMLBSDKManager.shareInstance.getLastConnectService(result: result)
+        break
+        case "seek2Position":
+            let argument = dict as! [String:Int];
+            if let a = argument["position"]{
+                LBPlayerManager.shareInstance.seekTo(position: a);
+            }
         break
     default:
         result(FlutterMethodNotImplemented)
         break;
     }
-    
+    }
     //result("iOS " + UIDevice.current.systemVersion)
   }
 }
