@@ -46,7 +46,7 @@ class Lblelinkplugin {
           _lbCallBack?.pauseCallBack();
           break;
         case 5:
-          _lbCallBack?.pauseCallBack();
+          _lbCallBack?.completeCallBack();
           break;
         case 6:
           _lbCallBack?.stopCallBack();
