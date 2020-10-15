@@ -15,7 +15,7 @@ public class SwiftLblelinkpluginPlugin: NSObject, FlutterPlugin {
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     
-    if let dict = call.arguments as? [String:Any]{
+    let dict = call.arguments as? [String:Any];
     
     switch call.method {
         case "initLBSdk":
@@ -59,6 +59,6 @@ public class SwiftLblelinkpluginPlugin: NSObject, FlutterPlugin {
         break;
     }
     }
-    //result("iOS " + UIDevice.current.systemVersion)
-  }
+//    result("iOS " + UIDevice.current.systemVersion)
+  
 }

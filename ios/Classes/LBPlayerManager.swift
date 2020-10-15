@@ -52,6 +52,8 @@ class LBPlayerManager: NSObject {
     
     func seekTo(position: Int){
         
+        print("position is \(position)");
+        
         self.player.seek(to: position);
         
         

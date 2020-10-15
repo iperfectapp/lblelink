@@ -68,7 +68,7 @@ class _MyAppState extends State<MyApp> {
                     onPressed: () {
                       Lblelinkplugin.getServicesList((data) {
                         setState(() {
-                          _serviceNames.addAll(data);
+                          _serviceNames = data;
                         });
                       });
                     },
@@ -105,6 +105,11 @@ class _MyAppState extends State<MyApp> {
                       Lblelinkplugin.resumePlay();
                     },
                     child: Text("继续")),
+                FlatButton(
+                    onPressed: () {
+                      Lblelinkplugin.seek2Position(50);
+                    },
+                    child: Text("定位")),
                 FlatButton(
                     onPressed: () {
                       Lblelinkplugin.stop();

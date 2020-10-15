@@ -157,6 +157,8 @@ extension LMLBSDKManager: LBLelinkBrowserDelegate{
         
         self.services = services;
         
+        print("搜索列表：\(String(describing: services))")
+        
         LMLBEventChannelSupport.sharedInstance.sendServicesToFlutter(services: services)
         
     }
