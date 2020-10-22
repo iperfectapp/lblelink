@@ -157,8 +157,10 @@ class Lblelinkplugin {
   }
 
   //播放
-  static play(String playUrlString) {
-    _channel.invokeMethod("play", {"playUrlString": playUrlString});
+  //startPosition:初始播放位置，单位：秒
+  //headerInfo:播放器所需header信息
+  static play(String playUrlString,{int startPosition = 0,Map<String,dynamic> headerInfo}) {
+    _channel.invokeMethod("play", {"playUrlString": playUrlString,"startPosition":startPosition,"headerInfo":headerInfo});
   }
 
   static Future<String> get platformVersion async {

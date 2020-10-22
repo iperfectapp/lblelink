@@ -42,8 +42,25 @@ public class SwiftLblelinkpluginPlugin: NSObject, FlutterPlugin {
             LBPlayerManager.shareInstance.stop();
         break
         case "play":
-            let argument = dict as! [String:String];
-            LBPlayerManager.shareInstance.beginPlay(connection: LMLBSDKManager.shareInstance.linkConnection, playUrl: argument["playUrlString"] ?? "");
+            
+            var url: String = "";
+            var start: Int = 0;
+            var header: Dictionary<AnyHashable,Any>?
+            
+            if let playUrlString = dict?["playUrlString"]{
+                url = playUrlString as! String;
+            }
+           
+            if let startPosition = dict?["startPosition"]{
+                start = startPosition as! Int;
+            }
+            
+            if let h = dict?["headerInfo"]{
+                header = h as? Dictionary<AnyHashable,Any>;
+            }
+
+            LBPlayerManager.shareInstance.beginPlay(connection: LMLBSDKManager.shareInstance.linkConnection, playUrl: url,startPosition: start,headerInfo: header);
+
         break
         case "getLastConnectService":
             LMLBSDKManager.shareInstance.getLastConnectService(result: result)

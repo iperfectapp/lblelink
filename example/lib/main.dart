@@ -87,7 +87,7 @@ class _MyAppState extends State<MyApp> {
                 FlatButton(
                     onPressed: () {
                       Lblelinkplugin.play(
-                          'http://pullhls80d25490.live.126.net/live/7d9cc146131245ddbf2126d56c699191/playlist.m3u8');
+                          'http://pullhls80d25490.live.126.net/live/7d9cc146131245ddbf2126d56c699191/playlist.m3u8',startPosition: 50);
                     },
                     child: Text("开始投屏")),
                 FlatButton(
