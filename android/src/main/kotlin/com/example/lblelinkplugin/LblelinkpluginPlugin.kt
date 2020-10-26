@@ -86,7 +86,7 @@ public class LblelinkpluginPlugin : FlutterPlugin, MethodCallHandler {
                 LeBUtil.instance.stopSearch()
             }
             "play" -> {
-                LeBUtil.instance.play(call.argument<String>("playUrlString")!!)
+                LeBUtil.instance.play(call.argument<String>("playUrlString")!!,call.argument<Int>("startPosition")!!,call.argument<String>("androidHeader"))
             }
             "seek2Position" -> {
                 LeBUtil.instance.seek2Position(call.argument<String>("position")!! as Int)

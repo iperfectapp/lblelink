@@ -34,11 +34,11 @@ class SharedPreference<T>(val name: String, val default: T) {
     @Suppress("UNCHECKED_CAST")
     private fun getSharedPreferences(name: String, default: T): T = with(prefs) {
         val res: Any = when (default) {
-            is Long -> getLong(name, default)
-            is String -> getString(name, default)
-            is Int -> getInt(name, default)
-            is Boolean -> getBoolean(name, default)
-            is Float -> getFloat(name, default)
+            is Long -> getLong(name, default)?:0L
+            is String -> getString(name, default)?:""
+            is Int -> getInt(name, default)?:0
+            is Boolean -> getBoolean(name, default)?:false
+            is Float -> getFloat(name, default)?:0f
             else -> throw IllegalArgumentException("SharedPreferences can't be get this type")
         }
         return res as T

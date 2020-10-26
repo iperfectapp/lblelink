@@ -56,11 +56,11 @@ class LeBUtil private constructor() {
                 }
 
                 override fun onDisconnect(p0: LelinkServiceInfo?, p1: Int, p2: Int) {
-                    if(p1 == IConnectListener.CONNECT_INFO_DISCONNECT){
+                    if (p1 == IConnectListener.CONNECT_INFO_DISCONNECT) {
                         events?.success(
                                 buildResult(ResultType.disConnect, "disConnect")
                         )
-                    }else if(p1 == IConnectListener.CONNECT_ERROR_FAILED){
+                    } else if (p1 == IConnectListener.CONNECT_ERROR_FAILED) {
                         events?.success(buildResult(ResultType.connectError, "disConnect"))
                     }
 
@@ -227,13 +227,18 @@ class LeBUtil private constructor() {
     }
 
     ///播放视频
-    fun play(url: String) {
+    fun play(url: String, position: Int, header:String?)
+    {
         sdk.resume()
         var playerInfo = LelinkPlayerInfo()
-        playerInfo.url = url
-        playerInfo.loopMode = LelinkPlayerInfo.LOOP_MODE_SINGLE
-        playerInfo.type = LelinkSourceSDK.MEDIA_TYPE_VIDEO
-        playerInfo.lelinkServiceInfo = selectLelinkServiceInfo
+        playerInfo?.run {
+            this.url = url
+            loopMode = LelinkPlayerInfo.LOOP_MODE_SINGLE
+            type = LelinkSourceSDK.MEDIA_TYPE_VIDEO
+            this.header = header
+            lelinkServiceInfo = selectLelinkServiceInfo
+            startPosition = position
+        }
         sdk.startPlayMedia(playerInfo)
     }
 
