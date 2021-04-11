@@ -94,6 +94,9 @@ public class LblelinkpluginPlugin : FlutterPlugin, MethodCallHandler {
             "getLastConnectService" -> {
                 LeBUtil.instance.getLastIp(result)
             }
+            "searchForLelinkServiceFormQRCode" -> {
+                LeBUtil.instance.addQRCodeToLelinkServiceInfo(call.argument<String>("QRCodeStringValue")!!)
+            }
         }
     }
 

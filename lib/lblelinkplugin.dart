@@ -171,6 +171,15 @@ class Lblelinkplugin {
     });
   }
 
+  //扫码获取服务
+  static searchForLelinkServiceFormQRCode(String QRCodeStringValue) {
+    _channel.invokeMethod("searchForLelinkServiceFormQRCode", {
+      "QRCodeStringValue": QRCodeStringValue
+    }).then((value) => () {
+          print(value);
+        });
+  }
+
   static Future<String> get platformVersion async {
     final String version = await _channel.invokeMethod('getPlatformVersion');
     return version;

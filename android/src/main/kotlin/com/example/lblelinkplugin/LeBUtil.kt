@@ -263,4 +263,15 @@ class LeBUtil private constructor() {
         result.success(mapOf("tvName" to lastLinkName, "tvUID" to lastLinkUid, "ipAddress" to lastLinkIp))
     }
 
+    fun addQRCodeToLelinkServiceInfo(qrUrl:String){
+        sdk.addQRCodeToLelinkServiceInfo(qrUrl, object : IParceResultListener{
+            override fun onParceResult(resultCode: Int, lelinkServiceInfo: LelinkServiceInfo?) {
+                if (resultCode == IParceResultListener.PARCE_SUCCESS) {
+                    print("扫码成功")
+                } else {
+                    print("扫码失败")
+                }
+            }
+        })
+    }
 }
