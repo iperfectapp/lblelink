@@ -7,6 +7,8 @@ import com.hpplay.sdk.source.api.IConnectListener
 import com.hpplay.sdk.source.api.ILelinkPlayerListener
 import com.hpplay.sdk.source.api.LelinkPlayerInfo
 import com.hpplay.sdk.source.api.LelinkSourceSDK
+import com.hpplay.sdk.source.browse.api.IParceResultListener
+import com.hpplay.sdk.source.browse.api.IServiceInfoParseListener
 import com.hpplay.sdk.source.browse.api.LelinkServiceInfo
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodChannel
@@ -264,14 +266,17 @@ class LeBUtil private constructor() {
     }
 
     fun addQRCodeToLelinkServiceInfo(qrUrl:String){
-        sdk.addQRCodeToLelinkServiceInfo(qrUrl, object : IParceResultListener{
-            override fun onParceResult(resultCode: Int, lelinkServiceInfo: LelinkServiceInfo?) {
-                if (resultCode == IParceResultListener.PARCE_SUCCESS) {
-                    print("扫码成功")
-                } else {
-                    print("扫码失败")
-                }
-            }
+        sdk.addQRCodeToLelinkServiceInfo(qrUrl, IServiceInfoParseListener { code, info ->
+
         })
+//        sdk.addQRCodeToLelinkServiceInfo(qrUrl, object : IParceResultListener{
+//            override fun onParceResult(resultCode: Int, lelinkServiceInfo: LelinkServiceInfo?) {
+//                if (resultCode == IParceResultListener.PARCE_SUCCESS) {
+//                    print("扫码成功")
+//                } else {
+//                    print("扫码失败")
+//                }
+//            }
+//        })
     }
 }
