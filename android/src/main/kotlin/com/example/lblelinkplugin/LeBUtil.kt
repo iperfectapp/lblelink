@@ -114,6 +114,11 @@ class LeBUtil private constructor() {
 //                events?.success(Result().addParam("type", ResultType.info))
             }
 
+            ///新版本SDK增加了一个info接口
+            override fun onInfo(p0: Int, p1: String?) {
+                Log.d("乐播云", "onInfo$p1")
+            }
+
             override fun onVolumeChanged(p0: Float) {
                 Log.d("乐播云", "onVolumeChanged")
                 Observable.just(1).observeOn(AndroidSchedulers.mainThread()).subscribe {
@@ -227,8 +232,7 @@ class LeBUtil private constructor() {
     }
 
     ///播放视频
-    fun play(url: String, position: Int, header:String?)
-    {
+    fun play(url: String, position: Int, header: String?) {
         sdk.resume()
         var playerInfo = LelinkPlayerInfo()
         playerInfo?.run {
