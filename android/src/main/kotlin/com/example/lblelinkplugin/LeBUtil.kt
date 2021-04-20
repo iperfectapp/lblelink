@@ -18,7 +18,7 @@ class LeBUtil private constructor() {
     val sdk: LelinkSourceSDK = LelinkSourceSDK.getInstance()
     val deviceList = mutableListOf<LelinkServiceInfo>()
     var selectLelinkServiceInfo: LelinkServiceInfo? = null
-
+    var isCompleted: Boolean = false;
     var lastLinkIp by SharedPreference("lastLinkIp", "")
     var lastLinkName by SharedPreference("lastLinkName", "")
     var lastLinkUid by SharedPreference("lastLinkUid", "")
@@ -42,14 +42,21 @@ class LeBUtil private constructor() {
             setConnectListener(object : IConnectListener {
                 override fun onConnect(p0: LelinkServiceInfo?, p1: Int) {
                     Observable.just(p0).observeOn(AndroidSchedulers.mainThread()).subscribe {
+                        if (p0!!.uid == null) {
+                            return@subscribe
+                        }
                         events?.success(
                                 buildResult(ResultType.connect, "connect")
                         )
-                        p0!!.run {
-                            lastLinkIp = ip
-                            lastLinkName = name
-                            lastLinkUid = uid
+
+                        if (p0.uid != null) {
+                            p0.run {
+                                lastLinkIp = ip
+                                lastLinkName = name
+                                lastLinkUid = uid
+                            }
                         }
+
                         Log.d("乐播云", "连接成功")
                         playListener()
                     }
@@ -157,7 +164,13 @@ class LeBUtil private constructor() {
     ///初始化SDK
     fun initUtil(ctx: Context, appId: String, secret: String, result: MethodChannel.Result) {
         sdk.bindSdk(ctx, appId, secret) {
-            Observable.just(it).observeOn(AndroidSchedulers.mainThread()).subscribe { result.success(it) }
+            Observable.just(it).observeOn(AndroidSchedulers.mainThread()).subscribe { isComplete ->
+                if (!isCompleted) {
+                    isCompleted = true
+                    result.success(isComplete)
+                }
+
+            }
             if (it) {
                 sdk.setDebugMode(true)
                 initListener()
@@ -227,8 +240,7 @@ class LeBUtil private constructor() {
     }
 
     ///播放视频
-    fun play(url: String, position: Int, header:String?)
-    {
+    fun play(url: String, position: Int, header: String?) {
         sdk.resume()
         var playerInfo = LelinkPlayerInfo()
         playerInfo?.run {
