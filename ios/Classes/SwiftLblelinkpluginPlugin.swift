@@ -71,6 +71,9 @@ public class SwiftLblelinkpluginPlugin: NSObject, FlutterPlugin {
                 LBPlayerManager.shareInstance.seekTo(position: a);
             }
         break
+        case "stop":
+            LMLBSDKManager.shareInstance.stopSearchEquipment();
+        break
     default:
         result(FlutterMethodNotImplemented)
         break;

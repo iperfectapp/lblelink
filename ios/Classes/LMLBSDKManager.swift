@@ -48,6 +48,11 @@ class LMLBSDKManager: NSObject {
         
     }
     
+    func stopSearchEquipment(){
+        self.linkBrowser.stop();
+    }
+    
+    
     //连接设备
     func linkToService(ipAddress: String) {
         
