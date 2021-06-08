@@ -101,6 +101,11 @@ class Lblelinkplugin {
 //    });
   }
 
+  static stopSearchEquipment(){
+    //停止搜索设备
+    _channel.invokeMethod("beginSearchEquipment");
+  }
+
   //连接设备(参数未定)
   static connectToService(String ipAddress,
       {@required Function fConnectListener,
