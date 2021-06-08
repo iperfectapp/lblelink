@@ -71,7 +71,7 @@ public class SwiftLblelinkpluginPlugin: NSObject, FlutterPlugin {
                 LBPlayerManager.shareInstance.seekTo(position: a);
             }
         break
-        case "stop":
+        case "stopSearchEquipment":
             LMLBSDKManager.shareInstance.stopSearchEquipment();
         break
     default:
