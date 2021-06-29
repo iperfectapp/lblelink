@@ -79,15 +79,15 @@ class LMLBSDKManager: NSObject {
     }
     
     //获取上次连接的设备
-    func getLastConnectService(result: @escaping FlutterResult){
+    func getLastConnectService(result: @escaping FlutterResult) {
         
-        let lastServices = self.linkBrowser.lastServices()
+        let lastServices: Array? = self.linkBrowser.lastServices()
         
-        if lastServices?.count ?? 0 > 0{
+        if lastServices?.count ?? 0 > 0 {
         
             let ser = lastServices?[0]
             
-            if let item = ser{
+            if let item = ser {
             
                 let dict: [String:String] = [
                     "tvName": item.lelinkServiceName,
@@ -96,14 +96,14 @@ class LMLBSDKManager: NSObject {
                 ];
                
                 result(dict);
-            }else{
+            } else {
                 result([
                     "tvName": "",
                     "tvUID": "",
                     "ipAddress":""
                 ])
             }
-        }else{
+        } else {
             result([
                 "tvName": "",
                 "tvUID": "",
