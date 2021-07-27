@@ -121,6 +121,10 @@ class LeBUtil private constructor() {
 //                events?.success(Result().addParam("type", ResultType.info))
             }
 
+            override fun onInfo(p0: Int, p1: String?) {
+                Log.d("乐播云", "onInfo___$p1")
+            }
+
             override fun onVolumeChanged(p0: Float) {
                 Log.d("乐播云", "onVolumeChanged")
                 Observable.just(1).observeOn(AndroidSchedulers.mainThread()).subscribe {
@@ -204,7 +208,7 @@ class LeBUtil private constructor() {
     ///设备断链
     fun disConnect(@NonNull result: MethodChannel.Result) {
         sdk.connectInfos.run {
-            if (sdk.disConnect(this[0])) {
+            if (sdk.disconnect(this[0])) {
                 result.success(0)
             } else {
                 result.success(-1)

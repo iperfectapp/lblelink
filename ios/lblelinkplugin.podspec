@@ -15,7 +15,7 @@ A new Flutter plugin.
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'LBLelinkKit'
+  s.dependency 'LBLelinkKit','30706'
   s.platform = :ios, '8.0'
   
   s.static_framework = true
