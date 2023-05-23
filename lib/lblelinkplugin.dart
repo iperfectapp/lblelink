@@ -9,11 +9,11 @@ class Lblelinkplugin {
       const EventChannel("lblelink_event");
 
   //设备列表回调
-  static ValueChanged<List<TvData>> _serviecListener;
+  static ValueChanged<List<TvData>>? _serviecListener;
 
-  static Function _connectListener;
-  static Function _disConnectListener;
-  static LbCallBack _lbCallBack;
+  static Function? _connectListener;
+  static Function? _disConnectListener;
+  static LbCallBack? _lbCallBack;
 
   static set lbCallBack(LbCallBack value) {
     _lbCallBack = value;
@@ -26,7 +26,7 @@ class Lblelinkplugin {
 
       switch (type) {
         case -1:
-          _disConnectListener.call();
+          _disConnectListener?.call();
           break;
         case 0:
           TvListResult _tvList = TvListResult();
@@ -101,15 +101,15 @@ class Lblelinkplugin {
 //    });
   }
 
-  static stopSearchEquipment(){
+  static stopSearchEquipment() {
     //停止搜索设备
     _channel.invokeMethod("stopSearchEquipment");
   }
 
   //连接设备(参数未定)
   static connectToService(String ipAddress,
-      {@required Function fConnectListener,
-      @required Function fDisConnectListener}) {
+      {required Function fConnectListener,
+      required Function fDisConnectListener}) {
     _connectListener = fConnectListener;
     _disConnectListener = fDisConnectListener;
     _channel.invokeMethod("connectToService", {"ipAddress": ipAddress});
@@ -166,8 +166,8 @@ class Lblelinkplugin {
   //headerInfo:播放器所需header信息
   static play(String playUrlString,
       {int startPosition = 0,
-      Map<String, dynamic> headerInfo,
-      String androidHeader}) {
+      Map<String, dynamic>? headerInfo,
+      String? androidHeader}) {
     _channel.invokeMethod("play", {
       "playUrlString": playUrlString,
       "startPosition": startPosition,

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:lblelinkplugin/tv_list.dart';
@@ -22,8 +20,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     initPlatformState();
-
-
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -57,14 +53,14 @@ class _MyAppState extends State<MyApp> {
           children: <Widget>[
             Column(
               children: <Widget>[
-                FlatButton(
+                ElevatedButton(
                     onPressed: () {
                       Lblelinkplugin.initLBSdk(
                           "14342", "c67255e53e3feee87673bc67f6895360");
                       Lblelinkplugin.eventChannelDistribution();
                     },
                     child: Text("初始化")),
-                FlatButton(
+                ElevatedButton(
                     onPressed: () {
                       Lblelinkplugin.getServicesList((data) {
                         setState(() {
@@ -73,44 +69,41 @@ class _MyAppState extends State<MyApp> {
                       });
                     },
                     child: Text("搜索设备")),
-                FlatButton(
+                ElevatedButton(
                     onPressed: () {
-
-                      Lblelinkplugin.getLastConnectService().then((value){
-
+                      Lblelinkplugin.getLastConnectService().then((value) {
                         print("上次设备是：${value}");
-
                       });
-
                     },
                     child: Text("上次设备")),
-                FlatButton(
+                ElevatedButton(
                     onPressed: () {
                       Lblelinkplugin.play(
-                          'http://pullhls80d25490.live.126.net/live/7d9cc146131245ddbf2126d56c699191/playlist.m3u8',startPosition: 50);
+                          'http://pullhls80d25490.live.126.net/live/7d9cc146131245ddbf2126d56c699191/playlist.m3u8',
+                          startPosition: 50);
                     },
                     child: Text("开始投屏")),
-                FlatButton(
+                ElevatedButton(
                     onPressed: () {
 //                      Lblelinkplugin.pause();
 
-                      Lblelinkplugin.getLastConnectService().then((data){
-                        print("******${data.ipAddress},${data.name},${data.uId}");
+                      Lblelinkplugin.getLastConnectService().then((data) {
+                        print(
+                            "******${data.ipAddress},${data.name},${data.uId}");
                       });
-                    
                     },
                     child: Text("暂停")),
-                FlatButton(
+                ElevatedButton(
                     onPressed: () {
                       Lblelinkplugin.resumePlay();
                     },
                     child: Text("继续")),
-                FlatButton(
+                ElevatedButton(
                     onPressed: () {
                       Lblelinkplugin.seek2Position(50);
                     },
                     child: Text("定位")),
-                FlatButton(
+                ElevatedButton(
                     onPressed: () {
                       Lblelinkplugin.stop();
                     },
@@ -132,8 +125,10 @@ class _MyAppState extends State<MyApp> {
                       ],
                     ),
                     onTap: () {
-                      Lblelinkplugin.connectToService(_serviceNames[index].ipAddress,
-                          fConnectListener: () {}, fDisConnectListener: () {});
+                      Lblelinkplugin.connectToService(
+                          _serviceNames[index].ipAddress!,
+                          fConnectListener: () {},
+                          fDisConnectListener: () {});
                     },
                   );
                 },
@@ -149,5 +144,4 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
-
 }
