@@ -9,10 +9,9 @@
  */
 
 class TvListResult {
-  List<TvData> tvList;
+  List<TvData> tvList = [];
 
   void getResultFromMap(data) {
-    tvList = List();
     data.forEach((info) {
       tvList.add(TvData()
         ..name = info["tvName"]
@@ -23,7 +22,7 @@ class TvListResult {
 }
 
 class TvData {
-  String name;
-  String uId;
-  String ipAddress;
+  String? name;
+  String? uId;
+  String? ipAddress;
 }
